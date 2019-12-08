@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
+import { environment } from '../environments/environment';
+const BACKEND_URL = environment.apiEndpoint;
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +30,8 @@ export class ApiService {
    * Get organizational array
   */
  getOrgaStructure(): Observable<any> {
-  const apiURL = 'http://localhost:4200/assets/oranganization_structure.json';
+  const apiURL = `${BACKEND_URL}` + 'assets/oranganization_structure.json';
+  console.log('apiURL => ', apiURL);
   return this.http.get(apiURL)
   .pipe(map(response => {
     return response;
@@ -39,7 +42,7 @@ export class ApiService {
    * Get employee array
   */
  getEmployee(): Observable<any> {
-  const apiURL = 'http://localhost:4200/assets/employee.json';
+  const apiURL = `${BACKEND_URL}` + 'assets/employee.json';
   return this.http.get(apiURL)
   .pipe(map(response => {
     return response;
